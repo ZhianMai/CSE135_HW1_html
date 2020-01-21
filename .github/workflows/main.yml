@@ -15,6 +15,25 @@ jobs:
       run: |
         echo Add other actions to build,
         echo test, and deploy your project.
+name: GitHub Action for Firebase
+uses: w9jds/firebase-action@v1.1.0
 
-- name: GitHub Action for Firebase
-  uses: w9jds/firebase-action@v1.1.0
+name: Build and Deploy
+on:
+  push:
+    branches:
+    - master
+jobs:
+  main:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Build Hugo
+      uses: lowply/build-hugo@v0.0.2
+    - name: Deploy to Firebase
+      uses: lowply/deploy-firebase@v0.0.2
+      env:
+        FIREBASE_TOKEN: ${{ 1//06df1VY__Kz8fCgYIARAAGAYSNwF-L9IrBSmfu4CHfKoQm90tyvvxAKQZ5KpsIy7OkZYKg-S7pTNZw8L_w2wkIGYFUNUWvOEFTSA }}
+        FIREBASE_PROJECT: CSE-135-HW1
